@@ -1,6 +1,12 @@
 ### GET example for own server
 GET http://localhost:3000/api/cards
 
+### GET one card from array
+GET http://localhost:3000/api/cards/12345abc
+
+### GET try to get one card with id that does not exist from array
+GET http://localhost:3000/api/cards/54321abc
+
 ### POST
 POST http://localhost:3000/api/cards
 Content-Type: application/json
