@@ -3,6 +3,19 @@ const { nanoid } = require('nanoid')
 
 const router = express.Router()
 
+let cards = [
+  {
+    text: 'What is MongoDB?',
+    author: 'John Doe',
+    id: '12345abc',
+  },
+  {
+    text: 'What is Node.js?',
+    author: 'Jane Doe',
+    id: '1234abcd',
+  },
+]
+
 router.get('/', (req, res) => {
   res.set('Content-type', 'text/html; charset=utf-8')
   res.send(req.body)
