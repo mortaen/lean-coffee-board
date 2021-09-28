@@ -31,7 +31,17 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  res.send(req.body.text)
+  const { text, author } = req.body
+
+  if (text === '' || author === '') {
+    const error = { message: 'Information missing.' }
+    return res.status(400).json(error)
+  }
+
+  const newCard = { text, author, id: nanoid() }
+
+  cards = [...cards, newCard]
+  res.status(200).json(newCard)
 })
 
 router.put('/:id', (req, res) => {

@@ -12,7 +12,8 @@ POST http://localhost:3000/api/cards
 Content-Type: application/json
 
 {
-    "text": "This is a POST request"
+    "text": "This is a POST request",
+    "author": "Peter Petersen"
 }
 
 ### PUT
