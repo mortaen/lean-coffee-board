@@ -45,8 +45,33 @@ router.post('/', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
-  console.log(req.body)
-  res.send(req.body)
+  const { id } = req.params
+  const { text, author } = req.body
+
+  const card = cards.find(card => card.id === id)
+
+  if (!card) {
+    const createdCard = {
+      text: text ? text : '',
+      author: author ? author : '',
+      id: id ? id : nanoid(),
+    }
+    cards = [...cards, createdCard]
+
+    return res.status(200).json(createdCard)
+  }
+
+  const updatedCard = {
+    text: text ? text : card.text,
+    author: author ? author : card.author,
+    id: card.id,
+  }
+
+  const index = cards.findIndex(card => card.id === id)
+
+  cards = [...cards.slice(0, index), updatedCard, ...cards.slice(index + 1)]
+
+  res.status(200).json(updatedCard)
 })
 
 router.patch('/:id', (req, res) => {

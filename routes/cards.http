@@ -1,6 +1,5 @@
 ### GET example for own server
 GET http://localhost:3000/api/cards
-
 ### GET one card from array
 GET http://localhost:3000/api/cards/12345abc
 
@@ -18,11 +17,19 @@ Content-Type: application/json
 
 ### PUT
 PUT http://localhost:3000/api/cards/1234
-
 Content-Type: application/json
 
 {
-    "text": "This is a PUT request"
+    "text": "Hi, my name is Bernardo.",
+    "author": "Bernardo"
+}
+
+### PUT update existing entry
+PUT http://localhost:3000/api/cards/12345abc
+Content-Type: application/json
+
+{
+    "author": "Erling"
 }
 
 ### PATCH 
