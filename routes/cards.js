@@ -112,14 +112,10 @@ router.patch('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const { id } = req.params
-  const card = cards.find(card => card.id === id)
-  if (!card) {
-    const error = { message: 'ID not found.' }
-    return res.status(404).json(error)
-  }
-  cards = cards.filter(card => card.id !== id)
-  const success = { message: 'Object was deleted.' }
-  res.status(200).json(success)
+
+  Card.findByIdAndDelete(id)
+    .then(data => res.status(200).json(data))
+    .catch(error => res.status(404).json(error))
 })
 
 module.exports = router

@@ -43,4 +43,4 @@ Content-Type: application/json
 }
 
 ### DELETE
-DELETE http://localhost:3000/api/cards/1234abcd
+DELETE http://localhost:3000/api/cards/61546bd7ff60fe3ae9f7f277
