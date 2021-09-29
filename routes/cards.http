@@ -5,14 +5,14 @@ GET http://localhost:3000/api/cards
 GET http://localhost:3000/api/cards/61543c7a6e01dc73254bb6c3
 
 ### GET try to get one card with id that does not exist from array
-GET http://localhost:3000/api/cards/54321abc
+GET http://localhost:3000/api/cards/61543c7a6e01dc73254bb6c4
 
 ### POST
 POST http://localhost:3000/api/cards
 Content-Type: application/json
 
 {
-    "text": "This is a POST request",
+    "text": "The new Card.",
     "author": "Peter Petersen"
 }
 
