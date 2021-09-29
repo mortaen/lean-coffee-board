@@ -29,7 +29,8 @@ PUT http://localhost:3000/api/cards/12345abc
 Content-Type: application/json
 
 {
-    "author": "Erling"
+    "author": "Erling",
+    "text": "Hi, my name is Erling."
 }
 
 ### PATCH 
