@@ -39,10 +39,10 @@ router.post('/', (req, res) => {
   }
 
   Card.create({
-    author: author,
-    text: text,
+    text,
+    author,
   })
-    .then(data => res.status(200).json(data))
+    .then(data => res.status(201).json(data))
     .catch(error => res.status(404).json(error))
 })
 
