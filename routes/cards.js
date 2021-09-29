@@ -48,6 +48,11 @@ router.put('/:id', (req, res) => {
   const { id } = req.params
   const { text, author } = req.body
 
+  if (!text || !author) {
+    const error = { message: 'Information missing.' }
+    return res.status(400).json(error)
+  }
+
   const card = cards.find(card => card.id === id)
 
   if (!card) {
