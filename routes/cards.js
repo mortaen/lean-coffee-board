@@ -90,24 +90,12 @@ router.patch('/:id', (req, res) => {
     return res.status(400).json(error)
   }
 
-  const card = cards.find(card => card.id === id)
-
-  if (!card) {
-    const error = { message: 'Could not find object with that id.' }
-    return res.status(404).json(error)
-  }
-
-  const newCard = {
-    text: text ? text : card.text,
-    author: author ? author : card.author,
-    id: card.id,
-  }
-
-  const index = cards.findIndex(card => card.id === id)
-
-  cards = [...cards.slice(0, index), newCard, ...cards.slice(index + 1)]
-
-  res.status(200).json(newCard)
+  Card.findByIdAndUpdate(id, {
+    text: text,
+    author: author,
+  })
+    .then(data => res.status(200).json(data))
+    .catch(error => res.status(404).json(error))
 })
 
 router.delete('/:id', (req, res) => {

@@ -35,11 +35,11 @@ Content-Type: application/json
 }
 
 ### PATCH 
-PATCH http://localhost:3000/api/cards/12345abc
+PATCH http://localhost:3000/api/cards/61545bf26e01dc73254bb6c4
 Content-Type: application/json
 
 {
-    "text": "This is the updated text"
+    "text": "Cool new text!"
 }
 
 ### DELETE
