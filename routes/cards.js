@@ -1,4 +1,5 @@
 const express = require('express')
+const Card = require('../models/Card')
 const { nanoid } = require('nanoid')
 
 const router = express.Router()
@@ -17,17 +18,16 @@ let cards = [
 ]
 
 router.get('/', (req, res) => {
-  res.status(200).json(cards)
+  Card.find()
+    .then(data => res.status(200).json(data))
+    .catch(error => res.status(404).json(error))
 })
 
 router.get('/:id', (req, res) => {
-  const exampleCard = cards.find(card => card.id === req.params.id)
-  if (exampleCard) {
-    res.status(200).json(exampleCard)
-  } else {
-    const error = { message: 'Could not find object with that id.' }
-    res.status(404).json(error)
-  }
+  const searchedId = req.params.id
+  Card.findById(searchedId)
+    .then(data => res.status(200).json(data))
+    .catch(error => res.status(404).json(error))
 })
 
 router.post('/', (req, res) => {
@@ -38,10 +38,12 @@ router.post('/', (req, res) => {
     return res.status(400).json(error)
   }
 
-  const newCard = { text, author, id: nanoid() }
-
-  cards = [...cards, newCard]
-  res.status(200).json(newCard)
+  Card.create({
+    text,
+    author,
+  })
+    .then(data => res.status(201).json(data))
+    .catch(error => res.status(404).json(error))
 })
 
 router.put('/:id', (req, res) => {
@@ -88,36 +90,20 @@ router.patch('/:id', (req, res) => {
     return res.status(400).json(error)
   }
 
-  const card = cards.find(card => card.id === id)
-
-  if (!card) {
-    const error = { message: 'Could not find object with that id.' }
-    return res.status(404).json(error)
-  }
-
-  const newCard = {
-    text: text ? text : card.text,
-    author: author ? author : card.author,
-    id: card.id,
-  }
-
-  const index = cards.findIndex(card => card.id === id)
-
-  cards = [...cards.slice(0, index), newCard, ...cards.slice(index + 1)]
-
-  res.status(200).json(newCard)
+  Card.findByIdAndUpdate(id, {
+    text: text,
+    author: author,
+  })
+    .then(data => res.status(200).json(data))
+    .catch(error => res.status(404).json(error))
 })
 
 router.delete('/:id', (req, res) => {
   const { id } = req.params
-  const card = cards.find(card => card.id === id)
-  if (!card) {
-    const error = { message: 'ID not found.' }
-    return res.status(404).json(error)
-  }
-  cards = cards.filter(card => card.id !== id)
-  const success = { message: 'Object was deleted.' }
-  res.status(200).json(success)
+
+  Card.findByIdAndDelete(id)
+    .then(data => res.status(200).json(data))
+    .catch(error => res.status(404).json(error))
 })
 
 module.exports = router
