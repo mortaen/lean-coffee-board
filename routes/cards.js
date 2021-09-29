@@ -54,7 +54,7 @@ router.put('/:id', (req, res) => {
     const createdCard = {
       text: text ? text : '',
       author: author ? author : '',
-      id: id ? id : nanoid(),
+      id: id,
     }
     cards = [...cards, createdCard]
 
