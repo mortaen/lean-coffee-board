@@ -2,7 +2,7 @@
 GET http://localhost:3000/api/cards
 
 ### GET one card from array
-GET http://localhost:3000/api/cards/12345abc
+GET http://localhost:3000/api/cards/61543c7a6e01dc73254bb6c3
 
 ### GET try to get one card with id that does not exist from array
 GET http://localhost:3000/api/cards/54321abc
