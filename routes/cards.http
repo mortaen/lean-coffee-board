@@ -1,5 +1,6 @@
 ### GET example for own server
 GET http://localhost:3000/api/cards
+
 ### GET one card from array
 GET http://localhost:3000/api/cards/12345abc
 

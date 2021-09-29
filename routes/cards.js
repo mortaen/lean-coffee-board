@@ -1,4 +1,5 @@
 const express = require('express')
+const Card = require('../models/Card')
 const { nanoid } = require('nanoid')
 
 const router = express.Router()
@@ -17,7 +18,9 @@ let cards = [
 ]
 
 router.get('/', (req, res) => {
-  res.status(200).json(cards)
+  Card.find()
+    .then(data => res.status(200).json(data))
+    .catch(error => res.status(404).json(error))
 })
 
 router.get('/:id', (req, res) => {
