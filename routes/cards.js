@@ -1,21 +1,7 @@
 const express = require('express')
 const Card = require('../models/Card')
-const { nanoid } = require('nanoid')
 
 const router = express.Router()
-
-let cards = [
-  {
-    text: 'What is MongoDB?',
-    author: 'John Doe',
-    id: '12345abc',
-  },
-  {
-    text: 'What is Node.js?',
-    author: 'Jane Doe',
-    id: '1234abcd',
-  },
-]
 
 router.get('/', (req, res) => {
   Card.find()
