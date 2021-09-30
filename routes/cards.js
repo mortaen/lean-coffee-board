@@ -96,12 +96,24 @@ router.patch('/:id', (req, res) => {
     .catch(error => res.status(404).json(error))
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', (req, res, next) => {
   const { id } = req.params
 
   Card.findByIdAndDelete(id)
-    .then(data => res.status(200).json(data))
-    .catch(error => res.status(404).json(error))
+    // .then(data => res.status(200).json(data))
+    // .catch(error => res.status(404).json(error))
+    .then(data => {
+      if (!data) {
+        throw new Error('This is my error!')
+      }
+      res.status(200).json(data)
+    })
+    .catch(error =>
+      next({
+        status: 404,
+        message: error.message || 'Document with id not found',
+      })
+    )
 })
 
 module.exports = router
