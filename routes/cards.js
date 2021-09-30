@@ -11,11 +11,21 @@ router.get('/', (req, res, next) => {
     )
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
   const searchedId = req.params.id
   Card.findById(searchedId)
-    .then(data => res.status(200).json(data))
-    .catch(error => res.status(404).json(error))
+    .then(data => {
+      if (!data) {
+        throw new Error('This is my error!')
+      }
+      res.status(200).json(data)
+    })
+    .catch(error =>
+      next({
+        status: 404,
+        message: error.message || 'Document with id not found',
+      })
+    )
 })
 
 router.post('/', (req, res) => {
