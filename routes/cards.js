@@ -3,10 +3,12 @@ const Card = require('../models/Card')
 
 const router = express.Router()
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   Card.find()
     .then(data => res.status(200).json(data))
-    .catch(error => res.status(404).json(error))
+    .catch(error =>
+      next({ status: 404, message: error.message || 'Document not found' })
+    )
 })
 
 router.get('/:id', (req, res) => {
