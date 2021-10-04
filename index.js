@@ -2,10 +2,14 @@ const express = require('express')
 const errorHandler = require('./errorHandler')
 const { use } = require('./routes/cards')
 const connectDatabase = require('./setupMongo')
-const app = express()
-const port = 3000
 
-connectDatabase('mongodb://localhost:27017/lean-coffee-board')
+require('dotenv').config()
+
+const app = express()
+
+const { PORT, MONGODB_URI } = process.env
+
+connectDatabase(MONGODB_URI)
 
 app.use(express.json())
 
@@ -13,8 +17,8 @@ app.use('/api/cards', require('./routes/cards'))
 
 app.use(errorHandler)
 
-app.listen(port, () => {
+app.listen(PORT, () => {
   {
-    console.log(`Server listening at http://localhost:${port}`)
+    console.log(`Server listening at http://localhost:${PORT}`)
   }
 })
